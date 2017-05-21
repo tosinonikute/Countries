@@ -12,7 +12,7 @@ public class RegionalBloc {
 
     private String acronym;
     private String name;
-    private List<String> otherAcronyms = null;
+    private List<Object> otherAcronyms = null;
     private List<String> otherNames = null;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -32,11 +32,11 @@ public class RegionalBloc {
         this.name = name;
     }
 
-    public List<String> getOtherAcronyms() {
+    public List<Object> getOtherAcronyms() {
         return otherAcronyms;
     }
 
-    public void setOtherAcronyms(List<String> otherAcronyms) {
+    public void setOtherAcronyms(List<Object> otherAcronyms) {
         this.otherAcronyms = otherAcronyms;
     }
 

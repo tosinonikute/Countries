@@ -2,8 +2,8 @@ package com.countries.di.component;
 
 import android.content.SharedPreferences;
 
-import com.hackernewsapp.di.modules.AppModule;
-import com.hackernewsapp.di.modules.NetModule;
+import com.countries.di.module.AppModule;
+import com.countries.di.module.NetModule;
 
 import javax.inject.Singleton;
 

@@ -2,8 +2,8 @@ package com.countries.di.module;
 
 import android.app.Application;
 
-import com.hackernewsapp.story.data.StoryInteractor;
-import com.hackernewsapp.story.data.StoryInteractorImpl;
+import com.countries.data.remote.CountryFetcher;
+import com.countries.data.remote.CountryFetcherImpl;
 
 import javax.inject.Singleton;
 
@@ -30,7 +30,7 @@ public class AppModule {
     }
 
     @Provides
-    StoryInteractor provideDataManager(StoryInteractorImpl appDataManager) {
+    CountryFetcher provideDataManager(CountryFetcherImpl appDataManager) {
         return appDataManager;
     }
 }

@@ -1,14 +1,12 @@
 package com.countries.data.remote;
 
 
-import com.hackernewsapp.discussion.model.Discussion;
-import com.hackernewsapp.story.model.Story;
+import com.countries.data.model.Country;
 
 import java.util.List;
 
 import retrofit.Callback;
 import retrofit.http.GET;
-import retrofit.http.Path;
 import rx.Observable;
 
 /**
@@ -17,16 +15,13 @@ import rx.Observable;
 
 public interface CountryInterface {
 
-    @GET("/{story_type}.json")
-    Observable<List<Long>> getStories(@Path("story_type") String storyType);
+    @GET("/all")
+    void getCountry2(Callback<List<Country>> response);
 
-    @GET("/item/{itemId}.json")
-    Observable<Story> getStory(@Path("itemId") String itemId);
+    @GET("/all")
+    Observable<List<Country>> getCountry();
 
-    @GET("/item/{itemId}.json")
-    Observable<Discussion> getComment(@Path("itemId") long itemId);
-
-    @GET("/{story_type}.json")
-    public void getStory2(@Path("story_type") String storyType, Callback<List<Long>> response);
+    @GET("/all?fields=name;alpha3Code;flag;capital")
+    Observable<List<Country>> getCountryByFilter();
 
 }

@@ -2,10 +2,14 @@ package com.countries;
 
 import android.app.Application;
 
-import com.hellomvp.di.component.DaggerHelloComponent;
-import com.hellomvp.di.component.HelloComponent;
-import com.hellomvp.di.module.HelloFetcherModule;
-import com.hellomvp.di.module.HelloModule;
+import com.countries.di.component.CountryComponent;
+import com.countries.di.component.DaggerCountryComponent;
+import com.countries.di.component.DaggerNetComponent;
+import com.countries.di.component.NetComponent;
+import com.countries.di.module.AppModule;
+import com.countries.di.module.CountryModule;
+import com.countries.di.module.NetModule;
+import com.countries.di.module.RetrofitModule;
 
 
 /**
@@ -14,22 +18,32 @@ import com.hellomvp.di.module.HelloModule;
 
 public class BaseApplication extends Application {
 
-    public HelloComponent component;
+    private NetComponent mNetComponent;
+    private CountryComponent mCountryComponent;
 
     @Override
-    public void onCreate(){
+    public void onCreate() {
         super.onCreate();
 
-        component = DaggerHelloComponent
-                .builder()
-                .helloModule(new HelloModule(this))
-                .helloFetcherModule(new HelloFetcherModule(this))
+        mNetComponent = DaggerNetComponent.builder()
+                .appModule(new AppModule(this))
+                .netModule(new NetModule())
+                .build();
+
+        mCountryComponent = DaggerCountryComponent.builder()
+                .netComponent(mNetComponent)
+                .retrofitModule(new RetrofitModule())
+                .countryModule(new CountryModule(this))
                 .build();
 
     }
 
-    public HelloComponent getComponent() {
-        return component;
+    public NetComponent getNetComponent() {
+        return mNetComponent;
+    }
+
+    public CountryComponent getCountryComponent() {
+        return mCountryComponent;
     }
 
 }

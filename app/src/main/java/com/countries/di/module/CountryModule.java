@@ -2,10 +2,9 @@ package com.countries.di.module;
 
 import android.app.Application;
 
-import com.hellomvp.HelloFetcher;
-import com.hellomvp.HelloFetcherImpl;
-import com.hellomvp.ui.hello.HelloPresenter;
-import com.hellomvp.ui.hello.HelloPresenterImpl;
+import com.countries.data.remote.CountryFetcher;
+import com.countries.data.remote.CountryFetcherImpl;
+import com.countries.ui.countrylist.CountryPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -25,13 +24,13 @@ public class CountryModule {
 
 
     @Provides
-    public CountryPresenter getHelloPresenter(CountryFetcher helloFetcher){
-        return new CountryPresenterImpl(application, helloFetcher);
+    public CountryPresenter getCountryPresenter(CountryFetcher countryFetcher){
+        return new CountryPresenter(application, countryFetcher);
     }
 
 
     @Provides
-    CountryFetcher provideHelloFetcher() {
+    CountryFetcher provideCountryFetcher() {
         return new CountryFetcherImpl( application );
     }
 

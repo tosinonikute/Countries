@@ -9,6 +9,7 @@ import java.util.Map;
  */
 
 public class Country {
+
     private String name;
     private List<String> topLevelDomain = null;
     private String alpha2Code;
@@ -19,9 +20,9 @@ public class Country {
     private String region;
     private String subregion;
     private Integer population;
-    private List<Integer> latlng = null;
+    private List<Double> latlng = null;
     private String demonym;
-    private Integer area;
+    private Double area;
     private Double gini;
     private List<String> timezones = null;
     private List<String> borders = null;
@@ -114,11 +115,11 @@ public class Country {
         this.population = population;
     }
 
-    public List<Integer> getLatlng() {
+    public List<Double> getLatlng() {
         return latlng;
     }
 
-    public void setLatlng(List<Integer> latlng) {
+    public void setLatlng(List<Double> latlng) {
         this.latlng = latlng;
     }
 
@@ -130,11 +131,11 @@ public class Country {
         this.demonym = demonym;
     }
 
-    public Integer getArea() {
+    public double getArea() {
         return area;
     }
 
-    public void setArea(Integer area) {
+    public void setArea(double area) {
         this.area = area;
     }
 
@@ -225,4 +226,5 @@ public class Country {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
+
 }

@@ -4,8 +4,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.countries.Api;
 import com.google.gson.GsonBuilder;
-import com.hackernewsapp.Api;
 
 import javax.inject.Singleton;
 
@@ -36,7 +36,6 @@ public class NetModule {
                 //.setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
 
-        //return restAdapter.create(CountryInterface.class);
         return restAdapter;
     }
 

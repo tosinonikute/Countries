@@ -1,13 +1,10 @@
 package com.countries.di.component;
 
-import com.countries.di.module.CountryFetcherModule;
 import com.countries.di.module.CountryModule;
+import com.countries.di.module.RetrofitModule;
+import com.countries.di.scope.UserScope;
+import com.countries.ui.countrylist.CountryPresenter;
 import com.countries.ui.countrylist.MainActivity;
-import com.hellomvp.di.module.HelloFetcherModule;
-import com.hellomvp.di.module.HelloModule;
-import com.hellomvp.di.scope.UserScope;
-import com.hellomvp.ui.hello.HelloActivity;
-import com.hellomvp.ui.hello.HelloPresenter;
 
 import dagger.Component;
 
@@ -16,7 +13,7 @@ import dagger.Component;
  */
 
 @UserScope
-@Component(modules = {CountryModule.class, CountryFetcherModule.class})
+@Component(dependencies = NetComponent.class, modules = {RetrofitModule.class, CountryModule.class})
 public interface CountryComponent {
 
     void inject(MainActivity mainActivity);

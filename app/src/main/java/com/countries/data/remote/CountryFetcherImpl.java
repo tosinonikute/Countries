@@ -15,7 +15,6 @@ public class CountryFetcherImpl implements CountryFetcher {
         this.application = application;
     }
 
-
     public String sayHelloFetcher(Context context, String str){
         String newString = str + " + Hello Android ! ";
         return newString;
