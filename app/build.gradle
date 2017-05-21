@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "com.countries"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    supportLibVer = '25.0.0'
+    daggerVer = '2.7'
+    javaxVer = '1.0'
+    retrofitVer = '1.9.0'
+    rxandroid = '1.2.0'
+    rxjava = '1.1.5'
+    espressoVer = '2.2.2'
+    junitVer = '4.12'
+    constraintlayoutVer = '1.0.0-alpha9'
+    glassfishAnnotation = '10.0-b28'
+    apacheCommons = '2.6'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Support lib
+    compile "com.android.support:appcompat-v7:${supportLibVer}"
+    compile "com.android.support:design:${supportLibVer}"
+    compile "com.android.support:support-v4:${supportLibVer}"
+    compile "com.android.support:support-annotations:${supportLibVer}"
+    compile "com.android.support.constraint:constraint-layout:${constraintlayoutVer}"
+
+    // Network
+    compile "com.squareup.retrofit:retrofit:${retrofitVer}"
+
+    // Rx
+    compile "io.reactivex:rxandroid:${rxandroid}"
+    compile "io.reactivex:rxjava:${rxjava}"
+
+    // DI
+    apt "com.google.dagger:dagger-compiler:${daggerVer}"
+    compile "com.google.dagger:dagger:${daggerVer}"
+    provided "javax.annotation:jsr250-api:${javaxVer}"
+
+    // Annotation
+    provided "org.glassfish:javax.annotation:${glassfishAnnotation}"
+
+    // Apache Commons
+    compile "commons-lang:commons-lang:${apacheCommons}"
+
+    // Tests
+    androidTestCompile("com.android.support.test.espresso:espresso-core:${espressoVer}", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:${espressoVer}", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+        exclude group: 'com.android.support', module: 'multidex'
+    }
+    androidTestCompile ('com.android.support.test.espresso:espresso-idling-resource:2.2') {
+        exclude module: 'support-annotations'
+    }
+
+    //Dependencies for JUNit and unit tests.
+    testCompile "junit:junit:${junitVer}"
+    testCompile "org.mockito:mockito-all:1.10.19"
+    testCompile "org.hamcrest:hamcrest-all:1.3"
+    testCompile("org.powermock:powermock-module-junit4:1.6.2")
+    testCompile("org.powermock:powermock-api-mockito:1.6.2")
+    testCompile 'com.squareup.okhttp3:mockwebserver:3.4.0-RC1'
+}
