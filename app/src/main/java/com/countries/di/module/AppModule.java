@@ -2,8 +2,8 @@ package com.countries.di.module;
 
 import android.app.Application;
 
-import com.countries.data.remote.CountryFetcher;
-import com.countries.data.remote.CountryFetcherImpl;
+import com.countries.data.remote.CountryInteractor;
+import com.countries.data.remote.CountryInteractorImpl;
 
 import javax.inject.Singleton;
 
@@ -30,7 +30,7 @@ public class AppModule {
     }
 
     @Provides
-    CountryFetcher provideDataManager(CountryFetcherImpl appDataManager) {
+    CountryInteractor provideDataManager(CountryInteractorImpl appDataManager) {
         return appDataManager;
     }
 }

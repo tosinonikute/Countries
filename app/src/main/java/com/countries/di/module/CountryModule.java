@@ -2,8 +2,8 @@ package com.countries.di.module;
 
 import android.app.Application;
 
-import com.countries.data.remote.CountryFetcher;
-import com.countries.data.remote.CountryFetcherImpl;
+import com.countries.data.remote.CountryInteractor;
+import com.countries.data.remote.CountryInteractorImpl;
 import com.countries.ui.countrylist.CountryPresenter;
 
 import dagger.Module;
@@ -24,14 +24,14 @@ public class CountryModule {
 
 
     @Provides
-    public CountryPresenter getCountryPresenter(CountryFetcher countryFetcher){
-        return new CountryPresenter(application, countryFetcher);
+    public CountryPresenter getCountryPresenter(CountryInteractor countryInteractor){
+        return new CountryPresenter(application, countryInteractor);
     }
 
 
     @Provides
-    CountryFetcher provideCountryFetcher() {
-        return new CountryFetcherImpl( application );
+    CountryInteractor provideCountryFetcher() {
+        return new CountryInteractorImpl( application );
     }
 
 

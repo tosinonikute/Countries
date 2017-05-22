@@ -39,6 +39,7 @@ ext {
     constraintlayoutVer = '1.0.0-alpha9'
     glassfishAnnotation = '10.0-b28'
     apacheCommons = '2.6'
+    glide = '3.6.0'
 }
 
 dependencies {
@@ -63,6 +64,9 @@ dependencies {
     compile "com.google.dagger:dagger:${daggerVer}"
     provided "javax.annotation:jsr250-api:${javaxVer}"
 
+    // Images
+    compile "com.github.bumptech.glide:glide:${glide}"
+
     // Annotation
     provided "org.glassfish:javax.annotation:${glassfishAnnotation}"
 
@@ -83,15 +87,16 @@ dependencies {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
         exclude group: 'com.android.support', module: 'multidex'
     }
-    androidTestCompile ('com.android.support.test.espresso:espresso-idling-resource:2.2') {
+    androidTestCompile('com.android.support.test.espresso:espresso-idling-resource:2.2') {
         exclude module: 'support-annotations'
     }
 
     //Dependencies for JUNit and unit tests.
     testCompile "junit:junit:${junitVer}"
-    testCompile "org.mockito:mockito-all:1.10.19"
-    testCompile "org.hamcrest:hamcrest-all:1.3"
-    testCompile("org.powermock:powermock-module-junit4:1.6.2")
-    testCompile("org.powermock:powermock-api-mockito:1.6.2")
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'org.mockito:mockito-all:1.10.19'
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
+    testCompile 'org.powermock:powermock-module-junit4:1.6.2'
+    testCompile 'org.powermock:powermock-api-mockito:1.6.2'
     testCompile 'com.squareup.okhttp3:mockwebserver:3.4.0-RC1'
 }
