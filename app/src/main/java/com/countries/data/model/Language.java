@@ -7,7 +7,7 @@ import java.util.Map;
  * @author Tosin Onikute.
  */
 
-public class Language {
+public class Language implements java.io.Serializable {
 
     private String iso6391;
     private String iso6392;

@@ -21,7 +21,10 @@ public interface CountryInterface {
     @GET("/all")
     Observable<List<Country>> getCountry();
 
-    @GET("/all?fields=name;alpha3Code;flag;capital")
+    @GET("/all?fields=name;alpha2Code;alpha3Code;capital")
     Observable<List<Country>> getCountryByFilter();
+
+    @GET("/all")
+    Observable<List<Country>> getCountryByAlpha();
 
 }

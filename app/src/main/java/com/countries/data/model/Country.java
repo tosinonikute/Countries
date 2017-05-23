@@ -8,7 +8,7 @@ import java.util.Map;
  * @author Tosin Onikute.
  */
 
-public class Country {
+public class Country implements java.io.Serializable {
 
     private String name;
     private List<String> topLevelDomain = null;

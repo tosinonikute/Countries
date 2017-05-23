@@ -36,7 +36,8 @@ public class CountryListAdapter
 
     private String ctitle;
     private String cCapital;
-    private String thumbnailURL;
+    private String countryAlphaCode;
+    private String alpha3code;
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -86,7 +87,8 @@ public class CountryListAdapter
 
         ctitle = "";
         cCapital = "";
-        thumbnailURL = "";
+        countryAlphaCode = "";
+        alpha3code = "";
 
         if (model.getName() != null) {
             ctitle = model.getName();
@@ -96,27 +98,43 @@ public class CountryListAdapter
             cCapital = model.getCapital();
         }
 
-        if (model.getFlag() != null) {
-            thumbnailURL = model.getFlag();
+        String uri = "";
+        if (model.getAlpha2Code() != null && !model.getAlpha2Code().equals("")) {
+            countryAlphaCode = model.getAlpha2Code();
+            uri = "drawable/flag_" + countryAlphaCode.toLowerCase();
+        } else {
+            uri = "drawable/place_holder";
         }
 
-        logger.debug(String.valueOf(holder.getAdapterPosition()));
         holder.countryTitle.setText(ctitle);
         holder.countryCapital.setText(cCapital);
 
-        Glide.with(holder.countryItemImage.getContext())
-                .load(thumbnailURL)
-                .placeholder(R.drawable.place_holder)
-                .into(holder.countryItemImage);
+        int imageResource = mContext.getResources().getIdentifier(uri, null, mContext.getPackageName());
+
+        if(imageResource != 0){
+            Glide.with(holder.countryItemImage.getContext())
+                    .load(imageResource)
+                    .placeholder(R.drawable.place_holder)
+                    .into(holder.countryItemImage);
+        } else {
+            Glide.with(holder.countryItemImage.getContext())
+                    .load(R.drawable.place_holder)
+                    .into(holder.countryItemImage);
+        }
 
 
+        if (model.getAlpha3Code() != null) {
+            alpha3code = model.getAlpha3Code();
+        }
+
+        // launch the detail activity to show country information
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, CountryDetailActivity.class);
                 intent.putExtra("position", holder.getAdapterPosition());
-                intent.putExtra("mCountry", mCountry);
+                intent.putExtra("alpha3code", alpha3code);
                 context.startActivity(intent);
             }
         });

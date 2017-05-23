@@ -57,7 +57,6 @@ public class CountryPresenter extends BasePresenter<CountryView> {
 
                         getMvpView().hideLoading();
                         List<Country> arr = posts;
-                        logger.debug(posts.get(0).getName());
 
                         ArrayList<Country> countryItemList = new ArrayList<Country>(arr);
                         getMvpView().setAdapter(countryItemList);

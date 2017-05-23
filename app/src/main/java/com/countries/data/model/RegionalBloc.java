@@ -8,7 +8,7 @@ import java.util.Map;
  * @author Tosin Onikute.
  */
 
-public class RegionalBloc {
+public class RegionalBloc implements java.io.Serializable {
 
     private String acronym;
     private String name;

@@ -7,7 +7,7 @@ import java.util.Map;
  * @author Tosin Onikute.
  */
 
-public class Translations {
+public class Translations implements java.io.Serializable {
 
     private String de;
     private String es;

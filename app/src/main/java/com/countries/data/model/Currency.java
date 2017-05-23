@@ -7,7 +7,7 @@ import java.util.Map;
  * @author Tosin Onikute.
  */
 
-public class Currency {
+public class Currency implements java.io.Serializable {
 
     private String code;
     private String name;

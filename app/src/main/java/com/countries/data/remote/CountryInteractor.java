@@ -18,4 +18,6 @@ public interface CountryInteractor {
 
     Observable<List<Country>> fetchCountries(CountryInterface countryInterface);
 
+    Observable<List<Country>> fetchCountryByAlpha(CountryInterface countryInterface, String alpha3code);
+
 }
