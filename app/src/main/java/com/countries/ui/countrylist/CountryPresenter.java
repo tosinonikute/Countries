@@ -6,6 +6,7 @@ import com.countries.data.model.Country;
 import com.countries.data.remote.CountryInteractor;
 import com.countries.data.remote.CountryInterface;
 import com.countries.ui.base.BasePresenter;
+import com.countries.ui.detail.CountryDetailView;
 import com.countries.util.Logger;
 
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class CountryPresenter extends BasePresenter<CountryView> {
     private final Application application;
     private CountryInteractor countryInteractor;
     private CountryView countryView;
+    private CountryDetailView countryDetailView;
     private Logger logger = Logger.getLogger(getClass());
-
 
 
     public CountryPresenter(Application application, CountryInteractor countryInteractor) {
@@ -42,6 +43,10 @@ public class CountryPresenter extends BasePresenter<CountryView> {
     @Override
     public void detachView(){
         super.detachView();
+    }
+
+    public void setView(CountryDetailView countryDetailView){
+        this.countryDetailView = countryDetailView;
     }
 
     public void getCountryList(CountryInterface countryInterface, CompositeSubscription mCompositeSubscription){

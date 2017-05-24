@@ -1,5 +1,6 @@
 package com.countries.ui.detail;
 
+import com.countries.data.model.Country;
 import com.countries.ui.base.MvpView;
 
 /**
@@ -7,6 +8,18 @@ import com.countries.ui.base.MvpView;
  */
 
 public interface CountryDetailView extends MvpView {
+
+    void init();
+
+    void loadView();
+
+    void countryDetailList();
+
+    void setCountryDetails(Country details);
+
+    void displayOfflineSnackbar();
+
+    void hideOfflineSnackBar();
 
     void showLoading();
 

@@ -6,11 +6,7 @@ import com.countries.data.model.Country;
 import com.countries.data.remote.CountryInteractor;
 import com.countries.data.remote.CountryInterface;
 import com.countries.ui.base.BasePresenter;
-import com.countries.ui.countrylist.CountryView;
 import com.countries.util.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -21,13 +17,12 @@ import rx.subscriptions.CompositeSubscription;
  * @author Tosin Onikute.
  */
 
-public class CountryDetailPresenter  extends BasePresenter<CountryDetailView> {
+public class CountryDetailPresenter extends BasePresenter<CountryDetailView> {
 
     private final Application application;
     private CountryInteractor countryInteractor;
-    private CountryView countryView;
+    private CountryDetailView countryDetailView;
     private Logger logger = Logger.getLogger(getClass());
-
 
 
     public CountryDetailPresenter(Application application, CountryInteractor countryInteractor) {
@@ -45,6 +40,7 @@ public class CountryDetailPresenter  extends BasePresenter<CountryDetailView> {
         super.detachView();
     }
 
+
     public void getCountryList(CountryInterface countryInterface, CompositeSubscription mCompositeSubscription, String alpha3code){
 
         getMvpView().showLoading();
@@ -52,16 +48,15 @@ public class CountryDetailPresenter  extends BasePresenter<CountryDetailView> {
         mCompositeSubscription.add(countryInteractor.fetchCountryByAlpha(countryInterface, alpha3code)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<Country>>() {
+                .subscribe(new Action1<Country>() {
                     @Override
-                    public void call(List<Country> posts) {
+                    public void call(Country posts) {
 
                         getMvpView().hideLoading();
-                        List<Country> arr = posts;
-                        logger.debug(posts.get(0).getName());
+                        Country country = posts;
+                        logger.debug(posts.getSubregion());
 
-                        ArrayList<Country> countryItemList = new ArrayList<Country>(arr);
-                        //getMvpView().setAdapter(countryItemList);
+                        getMvpView().setCountryDetails(country);
 
                     }
                 }, new Action1<Throwable>() {

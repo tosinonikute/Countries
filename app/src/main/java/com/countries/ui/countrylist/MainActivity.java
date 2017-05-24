@@ -1,12 +1,16 @@
 package com.countries.ui.countrylist;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,6 +20,7 @@ import com.countries.data.model.Country;
 import com.countries.data.remote.CountryInterface;
 import com.countries.di.component.CountryComponent;
 import com.countries.ui.base.BaseActivity;
+import com.countries.ui.search.SearchActivity;
 import com.countries.util.Logger;
 import com.countries.util.NetworkUtil;
 import com.countries.util.ui.MaterialProgressBar;
@@ -25,6 +30,8 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import rx.subscriptions.CompositeSubscription;
+import xyz.danoz.recyclerviewfastscroller.sectionindicator.title.SectionTitleIndicator;
+import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
 public class MainActivity extends BaseActivity implements CountryView {
 
@@ -43,6 +50,9 @@ public class MainActivity extends BaseActivity implements CountryView {
     private MaterialProgressBar progressBar;
     private LinearLayoutManager layoutManager;
     private Snackbar snackbarOffline;
+    private VerticalRecyclerViewFastScroller fastScroller;
+    private SectionTitleIndicator sectionTitleIndicator;
+    private ImageView searchIconButton;
 
 
     @Override
@@ -59,11 +69,39 @@ public class MainActivity extends BaseActivity implements CountryView {
 
     // Initialize the view
     public void init() {
+
         progressBar = (MaterialProgressBar) findViewById(R.id.material_progress_bar);
+        searchIconButton = (ImageView) findViewById(R.id.search_icon_button);
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView = (RecyclerView) findViewById(R.id.countries_recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+
+        // fastscroller
+        fastScroller = (VerticalRecyclerViewFastScroller) findViewById(R.id.fast_scroller);
+        fastScroller.setRecyclerView(recyclerView);
+
+        // section indicator
+        sectionTitleIndicator = (SectionTitleIndicator) findViewById(R.id.fast_scroller_section_title_indicator);
+        recyclerView.setOnScrollListener(fastScroller.getOnScrollListener());
+        fastScroller.setSectionIndicator(sectionTitleIndicator);
+
+
+        searchIconButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchSearchActivity();
+            }
+        });
+
+    }
+
+    public String getSectionFirstLetter(String letter) {
+        if (!TextUtils.isEmpty(letter)) {
+            return letter.substring(0, 1).toUpperCase();
+        }
+
+        return null;
     }
 
     public void loadView(){
@@ -86,7 +124,19 @@ public class MainActivity extends BaseActivity implements CountryView {
         if(countryItemList.size() > 0) {
             adapter = new CountryListAdapter(getApplicationContext(), countryItemList);
             recyclerView.setAdapter(adapter); // set adapter on recyclerview
-            adapter.notifyDataSetChanged(); // Notify the adapter
+            //adapter.notifyDataSetChanged(); // Notify the adapter
+
+            fastScroller.setVisibility(View.VISIBLE);
+            recyclerView.addOnScrollListener(fastScroller.getOnScrollListener());
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    int topPosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+                    if(topPosition != -1) {
+                            sectionTitleIndicator.setTitleText(getSectionFirstLetter(adapter.getItemPos(topPosition).getName()));
+                    }
+                }
+            });
         }
     }
 
@@ -120,6 +170,16 @@ public class MainActivity extends BaseActivity implements CountryView {
     @Override
     public void hideLoading(){
         progressBar.setVisibility(View.GONE);
+    }
+
+
+    public void launchSearchActivity(){
+
+        Context context = getApplicationContext();
+        Intent intent = new Intent(context, SearchActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+
     }
 
     @Override

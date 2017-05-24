@@ -1,7 +1,6 @@
 package com.countries.data.remote;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.countries.data.model.Country;
 
@@ -30,11 +29,6 @@ public class CountryInteractorImpl implements CountryInteractor {
         this.application = application;
     }
 
-    public String sayHelloFetcher(Context context, String str){
-        String newString = str + " + Hello Android ! ";
-        return newString;
-    }
-
     public Observable<List<Country>> fetchCountries(CountryInterface countryInterface){
 
             return countryInterface.getCountryByFilter()
@@ -54,18 +48,18 @@ public class CountryInteractorImpl implements CountryInteractor {
     }
 
 
-    public Observable<List<Country>> fetchCountryByAlpha(CountryInterface countryInterface, String alpha3code){
+    public Observable<Country> fetchCountryByAlpha(CountryInterface countryInterface, String alpha3code){
 
-        return countryInterface.getCountryByFilter()
-                .flatMap(new Func1<List<Country>, Observable<List<Country>>>() {
+        return countryInterface.getCountryByAlpha(alpha3code)
+                .flatMap(new Func1<Country, Observable<Country>>() {
                     @Override
-                    public Observable<List<Country>> call(List<Country> countries) {
+                    public Observable<Country> call(Country countries) {
                         return Observable.just(countries);
                     }
                 })
-                .onErrorReturn(new Func1<Throwable, List<Country>>() {
+                .onErrorReturn(new Func1<Throwable, Country>() {
                     @Override
-                    public List<Country> call(Throwable thr) {
+                    public Country call(Throwable thr) {
                         return null;
                     }
                 });

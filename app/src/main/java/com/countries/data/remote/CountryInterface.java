@@ -7,6 +7,7 @@ import java.util.List;
 
 import retrofit.Callback;
 import retrofit.http.GET;
+import retrofit.http.Path;
 import rx.Observable;
 
 /**
@@ -24,7 +25,11 @@ public interface CountryInterface {
     @GET("/all?fields=name;alpha2Code;alpha3Code;capital")
     Observable<List<Country>> getCountryByFilter();
 
-    @GET("/all")
-    Observable<List<Country>> getCountryByAlpha();
+    @GET("/alpha/{alpha3code}")
+    Observable<Country> getCountryByAlpha(@Path("alpha3code") String alpha3code);
+
+    @GET("/alpha/{alpha3code}")
+    void getCountryByAlpha2(@Path("alpha3code") String alpha3code, Callback<Country> response);
+
 
 }

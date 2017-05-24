@@ -6,4 +6,5 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorSpacer">#cccccc</color>
     <color name="colorGrey">#333333</color>
+    <color name="colorSearchBar">#6000</color>
 </resources>

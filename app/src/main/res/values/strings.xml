@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Countries</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
     <!-- no connection -->
     <string name="no_connection_snackbar">No connection !</string>
     <string name="snackbar_action_retry">Retry</string>
+    <string name="search_hint">Choose Country</string>
 </resources>

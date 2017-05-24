@@ -7,6 +7,7 @@ import com.countries.di.component.DaggerCountryComponent;
 import com.countries.di.component.DaggerNetComponent;
 import com.countries.di.component.NetComponent;
 import com.countries.di.module.AppModule;
+import com.countries.di.module.CountryDetailModule;
 import com.countries.di.module.CountryModule;
 import com.countries.di.module.NetModule;
 import com.countries.di.module.RetrofitModule;
@@ -34,6 +35,7 @@ public class BaseApplication extends Application {
                 .netComponent(mNetComponent)
                 .retrofitModule(new RetrofitModule())
                 .countryModule(new CountryModule(this))
+                .countryDetailModule(new CountryDetailModule(this))
                 .build();
 
     }

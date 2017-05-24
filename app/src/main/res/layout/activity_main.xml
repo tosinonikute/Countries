@@ -4,12 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:recyclerviewfastscroller="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.countrylist.MainActivity">
 
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:theme="@style/SearchEditText"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:text="@string/app_name"
+                android:paddingLeft="20dp"/>
+
+            <ImageButton
+                style="@style/Widget.AppCompat.Light.ActionButton"
+                android:id="@+id/search_icon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_search"
+                android:clickable="false"/>
+
+        </LinearLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/top_margin">
 
     <com.countries.util.ui.MaterialProgressBar
         android:id="@+id/material_progress_bar"
@@ -25,8 +67,31 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/countries_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
 
+    <xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller
+        android:id="@+id/fast_scroller"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        app:rfs_handleColor="@color/colorPrimary"
+        android:visibility="gone"
+        />
+
+
+    <com.countries.util.ui.ColorGroupSectionTitleIndicator
+        android:id="@+id/fast_scroller_section_title_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/list_item_height"
+        android:layout_toLeftOf="@id/fast_scroller"
+        android:layout_toStartOf="@id/fast_scroller"
+
+        recyclerviewfastscroller:rfs_backgroundColor="@android:color/white"
+        recyclerviewfastscroller:rfs_textColor="@android:color/black"
+        />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

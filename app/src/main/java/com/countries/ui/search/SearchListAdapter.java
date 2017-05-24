@@ -1,4 +1,4 @@
-package com.countries.ui.countrylist;
+package com.countries.ui.search;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,8 +24,8 @@ import java.util.List;
  * @author Tosin Onikute.
  */
 
-public class CountryListAdapter
-        extends RecyclerView.Adapter<CountryListAdapter.ViewHolder> {
+public class SearchListAdapter
+        extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
 
     private final Logger logger = Logger.getLogger(getClass());
     private final TypedValue mTypedValue = new TypedValue();
@@ -65,7 +65,7 @@ public class CountryListAdapter
         return String.valueOf(mCountry.get(position).getName());
     }
 
-    public CountryListAdapter(Context context, ArrayList<Country> story) {
+    public SearchListAdapter(Context context, ArrayList<Country> story) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mContext = context;
         mBackground = mTypedValue.resourceId;
