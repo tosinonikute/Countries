@@ -65,11 +65,11 @@ public class CountryListAdapter
         return String.valueOf(mCountry.get(position).getName());
     }
 
-    public CountryListAdapter(Context context, ArrayList<Country> story) {
+    public CountryListAdapter(Context context, ArrayList<Country> country) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mContext = context;
         mBackground = mTypedValue.resourceId;
-        mCountry = story;
+        mCountry = country;
     }
 
     @Override
@@ -150,6 +150,13 @@ public class CountryListAdapter
         //mCountry.addAll(data);
         notifyDataSetChanged();
     }
+
+    public void add(Country data){
+        //mCountry.addAll(data);
+        notifyDataSetChanged();
+        mCountry.add(data);
+    }
+
 
     public Country getItemPos(int pos){
         return mCountry.get(pos);

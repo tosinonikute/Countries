@@ -65,11 +65,11 @@ public class SearchListAdapter
         return String.valueOf(mCountry.get(position).getName());
     }
 
-    public SearchListAdapter(Context context, ArrayList<Country> story) {
+    public SearchListAdapter(Context context, ArrayList<Country> country) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mContext = context;
         mBackground = mTypedValue.resourceId;
-        mCountry = story;
+        mCountry = country;
     }
 
     @Override
@@ -147,16 +147,18 @@ public class SearchListAdapter
     }
 
     public void addAll(List<Country> data){
-        //mCountry.addAll(data);
+        mCountry.addAll(data);
         notifyDataSetChanged();
     }
 
-    public Country getItemPos(int pos){
-        return mCountry.get(pos);
+    public void add(Country country){
+        mCountry.add(country);
+        notifyDataSetChanged();
     }
 
     public void clear(){
         mCountry.clear();
+        notifyDataSetChanged();
     }
 
 }
