@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,7 +44,7 @@ public class CountryDetailActivity extends BaseActivity implements CountryDetail
     private Logger logger = Logger.getLogger(getClass());
     private CompositeSubscription mCompositeSubscription;
     private ArrayList<Country> countryItemList;
-    private RelativeLayout newsLayout;
+    private LinearLayout detailLayout;
     private CountryListAdapter adapter;
     private MaterialProgressBar progressBar;
     private Snackbar snackbarOffline;
@@ -99,7 +98,7 @@ public class CountryDetailActivity extends BaseActivity implements CountryDetail
     public void init() {
         progressBar = (MaterialProgressBar) findViewById(R.id.material_progress_bar);
         detailsContainer = (LinearLayout) findViewById(R.id.details_container);
-
+        detailLayout = (LinearLayout) findViewById(R.id.detail_layout);
 
         detailFlag  = (ImageView) findViewById(R.id.detail_flag );
         toolbarText = (TextView) findViewById(R.id.toolbar_title);
@@ -186,7 +185,7 @@ public class CountryDetailActivity extends BaseActivity implements CountryDetail
 
 
     public void displayOfflineSnackbar() {
-        snackbarOffline = Snackbar.make(newsLayout, R.string.no_connection_snackbar, Snackbar.LENGTH_INDEFINITE);
+        snackbarOffline = Snackbar.make(detailLayout, R.string.no_connection_snackbar, Snackbar.LENGTH_INDEFINITE);
         TextView snackbarText = (TextView) snackbarOffline.getView().findViewById(android.support.design.R.id.snackbar_text);
         snackbarText.setTextColor(getApplicationContext().getResources().getColor(android.R.color.white));
         snackbarOffline.setAction(R.string.snackbar_action_retry, new View.OnClickListener() {

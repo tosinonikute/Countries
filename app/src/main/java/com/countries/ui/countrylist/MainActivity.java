@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity implements CountryView {
     private Logger logger = Logger.getLogger(getClass());
     private CompositeSubscription mCompositeSubscription;
     private ArrayList<Country> countryItemList;
-    private RelativeLayout newsLayout;
+    private RelativeLayout mainLayout;
     private CountryListAdapter adapter;
     private RecyclerView recyclerView;
     private MaterialProgressBar progressBar;
@@ -71,6 +71,7 @@ public class MainActivity extends BaseActivity implements CountryView {
     public void init() {
 
         progressBar = (MaterialProgressBar) findViewById(R.id.material_progress_bar);
+        mainLayout = (RelativeLayout) findViewById(R.id.main_layout);
         searchIconButton = (ImageView) findViewById(R.id.search_icon_button);
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView = (RecyclerView) findViewById(R.id.countries_recyclerview);
@@ -133,7 +134,7 @@ public class MainActivity extends BaseActivity implements CountryView {
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     int topPosition = layoutManager.findFirstCompletelyVisibleItemPosition();
                     if(topPosition != -1) {
-                            sectionTitleIndicator.setTitleText(getSectionFirstLetter(adapter.getItemPos(topPosition).getName()));
+                        sectionTitleIndicator.setTitleText(getSectionFirstLetter(adapter.getItemPos(topPosition).getName()));
                     }
                 }
             });
@@ -142,7 +143,7 @@ public class MainActivity extends BaseActivity implements CountryView {
 
 
     public void displayOfflineSnackbar() {
-        snackbarOffline = Snackbar.make(newsLayout, R.string.no_connection_snackbar, Snackbar.LENGTH_INDEFINITE);
+        snackbarOffline = Snackbar.make(mainLayout, R.string.no_connection_snackbar, Snackbar.LENGTH_INDEFINITE);
         TextView snackbarText = (TextView) snackbarOffline.getView().findViewById(android.support.design.R.id.snackbar_text);
         snackbarText.setTextColor(getApplicationContext().getResources().getColor(android.R.color.white));
         snackbarOffline.setAction(R.string.snackbar_action_retry, new View.OnClickListener() {

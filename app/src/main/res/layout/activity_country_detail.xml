@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -49,338 +50,338 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorSpacer"
-            android:padding="50dp">
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/detail_flag"
-            android:layout_width="170dp"
-            android:layout_height="130dp"
-            android:layout_gravity="center"
-            android:src="@drawable/place_holder" />
-
-         </LinearLayout>
-
-        <!-- title -->
-
-        <TextView
-            android:id="@+id/country_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textColor="@color/colorGrey"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:text="United States of America" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorSpacer"/>
-
-        <com.countries.util.ui.MaterialProgressBar
-            android:id="@+id/material_progress_bar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="100dp"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            />
-
-        <LinearLayout
-            android:id="@+id/details_container"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
-
-        <!-- row 1 -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_region" />
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/colorSpacer"
+                android:padding="50dp">
 
-                <TextView
-                    android:id="@+id/region"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="19sp"
-                    android:textColor="@color/colorGrey"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:text="Asia" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:text="Part of the world" />
+                <ImageView
+                    android:id="@+id/detail_flag"
+                    android:layout_width="170dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/place_holder" />
 
             </LinearLayout>
 
-        </LinearLayout>
+            <!-- title -->
 
-        <!-- Continue row 2 here -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/country_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textColor="@color/colorGrey"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="United States of America" />
 
-            <ImageView
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorSpacer"/>
+
+            <com.countries.util.ui.MaterialProgressBar
+                android:id="@+id/material_progress_bar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_capital" />
+                android:layout_marginTop="100dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                />
 
             <LinearLayout
+                android:id="@+id/details_container"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/capital"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="19sp"
-                    android:textColor="@color/colorGrey"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:text="Kabul" />
+                <!-- row 1 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:text="Capital" />
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_region" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/region"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="19sp"
+                            android:textColor="@color/colorGrey"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="Asia" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Part of the world" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Continue row 2 here -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_capital" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/capital"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="19sp"
+                            android:textColor="@color/colorGrey"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="Kabul" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Capital" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- Continue row 3 here -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_language" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/language"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="19sp"
+                            android:textColor="@color/colorGrey"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="Pashto, Dari" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Language" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- Continue row 4 here -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_subregion" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/sub_region"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="19sp"
+                            android:textColor="@color/colorGrey"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="Ismalic Republic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Sub Region" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- Continue row 5 here -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_area" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/area"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="19sp"
+                            android:textColor="@color/colorGrey"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="647 500km" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Territory, Km" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- Continue row 6 here -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_population" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/population"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="19sp"
+                            android:textColor="@color/colorGrey"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="28 150 000" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Population" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- Continue row 7 here -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingBottom="40dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_currency" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/currency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="19sp"
+                            android:textColor="@color/colorGrey"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="Afghani (AFN)" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Currency" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
 
             </LinearLayout>
-      </LinearLayout>
+            <!-- container -->
 
 
-        <!-- Continue row 3 here -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_language" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/language"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="19sp"
-                    android:textColor="@color/colorGrey"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:text="Pashto, Dari" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:text="Language" />
-
-            </LinearLayout>
+            <!-- end of row -->
         </LinearLayout>
 
-
-        <!-- Continue row 4 here -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_subregion" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/sub_region"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="19sp"
-                    android:textColor="@color/colorGrey"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:text="Ismalic Republic" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:text="Sub Region" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <!-- Continue row 5 here -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_area" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/area"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="19sp"
-                    android:textColor="@color/colorGrey"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:text="647 500km" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:text="Territory, Km" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <!-- Continue row 6 here -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_population" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/population"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="19sp"
-                    android:textColor="@color/colorGrey"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:text="28 150 000" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:text="Population" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <!-- Continue row 7 here -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:paddingBottom="40dp"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_currency" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/currency"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="19sp"
-                    android:textColor="@color/colorGrey"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:text="Afghani (AFN)" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:text="Currency" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-        </LinearLayout>
-        <!-- container -->
-
-
-
-<!-- end of row -->
-</LinearLayout>
-
-</android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 
 

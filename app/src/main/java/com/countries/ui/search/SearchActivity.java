@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.countries.BaseApplication;
@@ -45,7 +45,7 @@ public class SearchActivity extends BaseActivity implements CountryView {
     private Logger logger = Logger.getLogger(getClass());
     private CompositeSubscription mCompositeSubscription;
     private ArrayList<Country> countryList;
-    private RelativeLayout newsLayout;
+    private LinearLayout searchLayout;
     private SearchListAdapter adapter;
     private RecyclerView recyclerView;
     private MaterialProgressBar progressBar;
@@ -75,6 +75,7 @@ public class SearchActivity extends BaseActivity implements CountryView {
     // Initialize the view
     public void init() {
         progressBar = (MaterialProgressBar) findViewById(R.id.material_progress_bar);
+        searchLayout = (LinearLayout) findViewById(R.id.search_layout);
         searchEditText = (EditText) findViewById(R.id.search_edit_text);
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView = (RecyclerView) findViewById(R.id.countries_recyclerview);
@@ -111,7 +112,7 @@ public class SearchActivity extends BaseActivity implements CountryView {
 
 
     public void displayOfflineSnackbar() {
-        snackbarOffline = Snackbar.make(newsLayout, R.string.no_connection_snackbar, Snackbar.LENGTH_INDEFINITE);
+        snackbarOffline = Snackbar.make(searchLayout, R.string.no_connection_snackbar, Snackbar.LENGTH_INDEFINITE);
         TextView snackbarText = (TextView) snackbarOffline.getView().findViewById(android.support.design.R.id.snackbar_text);
         snackbarText.setTextColor(getApplicationContext().getResources().getColor(android.R.color.white));
         snackbarOffline.setAction(R.string.snackbar_action_retry, new View.OnClickListener() {
@@ -146,7 +147,8 @@ public class SearchActivity extends BaseActivity implements CountryView {
     public void receiveEditTextInput(){
 
         searchEditText.addTextChangedListener(new TextValidator(searchEditText) {
-            @Override public void validate(TextView textView, String text) {
+            @Override
+            public void validate(TextView textView, String text) {
                 String phone = searchEditText.getText().toString();
                 logger.debug(phone);
                 onSearchTextChanged(searchEditText.getText().toString());
@@ -169,10 +171,10 @@ public class SearchActivity extends BaseActivity implements CountryView {
         adapter.clear();
         for (Country country : countryList) {
             if(query.length() <= country.getName().length() ){
-               if(query.equals(country.getName().substring(0, query.length()))){
-                   adapter.add(country);
-                   matchSearchString = true;
-               }
+                if(query.equals(country.getName().substring(0, query.length()))){
+                    adapter.add(country);
+                    matchSearchString = true;
+                }
             }
         }
 
