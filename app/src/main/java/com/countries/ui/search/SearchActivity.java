@@ -86,9 +86,8 @@ public class SearchActivity extends BaseActivity implements CountryView {
 
     public void loadView(){
 
-        receiveEditTextInput();
-
         if(NetworkUtil.isConnected(getApplicationContext())) {
+            receiveEditTextInput();
             countryList();
             hideOfflineSnackBar();
         } else {
