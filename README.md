@@ -4,9 +4,10 @@ An app showing list of countries and details using a RESTful API (https://restco
 -  Clean, Simple and Minimalist design
 -  Follows MVP architectural pattern
 -  Uses Dagger2 for DI
--  Rxjava and Retrofit for Network calls
+-  Rxjava2 and Retrofit2 for Network calls
 -  Works in either orientation (portrait/landscape)
 -  Use Gradle to build, jCenter/Maven Central for dependencies (no .jar dependencies)
+-  Added Java8 support
 -  Includes Unit Test
 -  Includes Automated Test
 
@@ -17,6 +18,7 @@ An app showing list of countries and details using a RESTful API (https://restco
 
 ## App has 3 screens
 - Home screen with list of countries displayed in aphabetical order with recyclerviewfastscroller
+    - Swipe to delete with an undo option on home screen
 - Search country screen with AutoSearch feature
 - Detail screen that shows full details about a selected country
 
