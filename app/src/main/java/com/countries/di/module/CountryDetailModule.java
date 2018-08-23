@@ -24,7 +24,7 @@ public class CountryDetailModule {
 
     @Provides
     public CountryDetailPresenter getCountryDetailPresenter(CountryInteractor countryInteractor){
-        return new CountryDetailPresenter(application, countryInteractor);
+        return new CountryDetailPresenter(countryInteractor);
     }
 
 

@@ -6,8 +6,8 @@ import com.countries.data.model.Country;
 
 import java.util.List;
 
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+
 
 /**
  * @author Tosin Onikute.
@@ -23,52 +23,13 @@ import rx.functions.Func1;
 
 public class CountryInteractorImpl implements CountryInteractor {
 
-    private final Application application;
-
-    public CountryInteractorImpl(Application application) {
-        this.application = application;
-    }
-
     public Observable<List<Country>> fetchCountries(CountryInterface countryInterface){
-
-            return countryInterface.getCountryByFilter()
-                    .flatMap(new Func1<List<Country>, Observable<List<Country>>>() {
-                        @Override
-                        public Observable<List<Country>> call(List<Country> countries) {
-                            return Observable.just(countries);
-                        }
-                    })
-                    .onErrorReturn(new Func1<Throwable, List<Country>>() {
-                        @Override
-                        public List<Country> call(Throwable thr) {
-                            return null;
-                        }
-                    });
-
+        return countryInterface.getCountryByFilter()
+                .flatMap(countries -> Observable.just(countries));
     }
-
 
     public Observable<Country> fetchCountryByAlpha(CountryInterface countryInterface, String alpha3code){
-
         return countryInterface.getCountryByAlpha(alpha3code)
-                .flatMap(new Func1<Country, Observable<Country>>() {
-                    @Override
-                    public Observable<Country> call(Country countries) {
-                        return Observable.just(countries);
-                    }
-                })
-                .onErrorReturn(new Func1<Throwable, Country>() {
-                    @Override
-                    public Country call(Throwable thr) {
-                        return null;
-                    }
-                });
-
+                .flatMap(country -> Observable.just(country));
     }
-
-
-
-
-
-
 }

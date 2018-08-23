@@ -8,7 +8,7 @@ import com.countries.di.module.NetModule;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import retrofit.RestAdapter;
+import retrofit2.Retrofit;
 
 
 /**
@@ -20,7 +20,6 @@ import retrofit.RestAdapter;
 public interface NetComponent {
 
     // downstream components need these exposed
-    RestAdapter restAdapter();
+    Retrofit restAdapter();
     SharedPreferences sharedPreferences();
-
 }

@@ -1,6 +1,7 @@
 package com.countries.ui.detail;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 
 import com.countries.data.model.Country;
 import com.countries.data.remote.CountryInteractor;
@@ -8,10 +9,9 @@ import com.countries.data.remote.CountryInterface;
 import com.countries.ui.base.BasePresenter;
 import com.countries.util.Logger;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author Tosin Onikute.
@@ -19,14 +19,11 @@ import rx.subscriptions.CompositeSubscription;
 
 public class CountryDetailPresenter extends BasePresenter<CountryDetailView> {
 
-    private final Application application;
     private CountryInteractor countryInteractor;
     private CountryDetailView countryDetailView;
     private Logger logger = Logger.getLogger(getClass());
 
-
-    public CountryDetailPresenter(Application application, CountryInteractor countryInteractor) {
-        this.application = application;
+    public CountryDetailPresenter(CountryInteractor countryInteractor) {
         this.countryInteractor = countryInteractor;
     }
 
@@ -40,33 +37,22 @@ public class CountryDetailPresenter extends BasePresenter<CountryDetailView> {
         super.detachView();
     }
 
-
-    public void getCountryList(CountryInterface countryInterface, CompositeSubscription mCompositeSubscription, String alpha3code){
-
-        getMvpView().showLoading();
-
-        mCompositeSubscription.add(countryInteractor.fetchCountryByAlpha(countryInterface, alpha3code)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Country>() {
-                    @Override
-                    public void call(Country posts) {
-
-                        getMvpView().hideLoading();
-                        Country country = posts;
-                        logger.debug(posts.getSubregion());
-
-                        getMvpView().setCountryDetails(country);
-
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        logger.debug(throwable.getLocalizedMessage());
-                    }
-                }));
-
+    public void getCountryList(CountryInterface countryInterface, CompositeDisposable compositeDisposable, String alpha3code){
+        if(isViewAttached()) {
+            getMvpView().showLoading();
+            countryInteractor.fetchCountryByAlpha(countryInterface, alpha3code)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::handleResponse,this::handleError);
+        }
     }
 
+    private void handleResponse(Country country) {
+        getMvpView().setCountryDetails(country);
+    }
+
+    private void handleError(@NonNull Throwable error) {
+        logger.debug(error.getLocalizedMessage());
+    }
 
 }

@@ -1,6 +1,6 @@
 package com.countries.ui.countrylist;
 
-import android.app.Application;
+import android.support.annotation.NonNull;
 
 import com.countries.data.model.Country;
 import com.countries.data.remote.CountryInteractor;
@@ -12,10 +12,9 @@ import com.countries.util.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author Tosin Onikute.
@@ -23,15 +22,12 @@ import rx.subscriptions.CompositeSubscription;
 
 public class CountryPresenter extends BasePresenter<CountryView> {
 
-    private final Application application;
     private CountryInteractor countryInteractor;
     private CountryView countryView;
     private CountryDetailView countryDetailView;
     private Logger logger = Logger.getLogger(getClass());
 
-
-    public CountryPresenter(Application application, CountryInteractor countryInteractor) {
-        this.application = application;
+    public CountryPresenter(CountryInteractor countryInteractor) {
         this.countryInteractor = countryInteractor;
     }
 
@@ -49,35 +45,23 @@ public class CountryPresenter extends BasePresenter<CountryView> {
         this.countryDetailView = countryDetailView;
     }
 
-    public void getCountryList(CountryInterface countryInterface, CompositeSubscription mCompositeSubscription){
-
-        getMvpView().showLoading();
-
-        mCompositeSubscription.add(countryInteractor.fetchCountries(countryInterface)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<Country>>() {
-                    @Override
-                    public void call(List<Country> posts) {
-
-                        getMvpView().hideLoading();
-                        List<Country> arr = posts;
-
-                        ArrayList<Country> countryItemList = new ArrayList<Country>(arr);
-                        getMvpView().setAdapter(countryItemList);
-
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        logger.debug(throwable.getLocalizedMessage());
-                    }
-                }));
-
+    public void getCountryList(CountryInterface countryInterface, CompositeDisposable compositeDisposable){
+        if(isViewAttached()) {
+            getMvpView().showLoading();
+            compositeDisposable.add(countryInteractor.fetchCountries(countryInterface)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::handleResponse, this::handleError));
+        }
     }
 
+    private void handleResponse(List<Country> posts) {
+        ArrayList<Country> countryItemList = new ArrayList<Country>(posts);
+        getMvpView().setAdapter(countryItemList);
+    }
 
-
-
+    private void handleError(@NonNull Throwable error) {
+        logger.debug(error.getLocalizedMessage());
+    }
 
 }

@@ -4,7 +4,7 @@ import com.countries.data.model.Country;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * @author Tosin Onikute.

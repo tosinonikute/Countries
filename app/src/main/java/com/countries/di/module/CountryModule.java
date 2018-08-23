@@ -25,13 +25,12 @@ public class CountryModule {
 
     @Provides
     public CountryPresenter getCountryPresenter(CountryInteractor countryInteractor){
-        return new CountryPresenter(application, countryInteractor);
+        return new CountryPresenter(countryInteractor);
     }
-
 
     @Provides
     CountryInteractor provideCountryFetcher() {
-        return new CountryInteractorImpl( application );
+        return new CountryInteractorImpl();
     }
 
 

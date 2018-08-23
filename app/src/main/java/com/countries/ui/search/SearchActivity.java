@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class SearchActivity extends BaseActivity implements CountryView {
 
@@ -43,7 +43,7 @@ public class SearchActivity extends BaseActivity implements CountryView {
     private EditText searchEditText;
 
     private Logger logger = Logger.getLogger(getClass());
-    private CompositeSubscription mCompositeSubscription;
+    private CompositeDisposable mCompositeDisposable;
     private ArrayList<Country> countryList;
     private LinearLayout searchLayout;
     private SearchListAdapter adapter;
@@ -65,7 +65,7 @@ public class SearchActivity extends BaseActivity implements CountryView {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        mCompositeSubscription = new CompositeSubscription();
+        mCompositeDisposable = new CompositeDisposable();
         init();
         loadView();
 
@@ -96,11 +96,12 @@ public class SearchActivity extends BaseActivity implements CountryView {
     }
 
     public void countryList(){
-        presenter.getCountryList(countryInterface, mCompositeSubscription);
+        presenter.getCountryList(countryInterface, mCompositeDisposable);
     }
 
 
     public void setAdapter(ArrayList<Country> countryItemList){
+        hideLoading();
         if(countryItemList.size() > 0) {
             countryList = new ArrayList(countryItemList);
             adapter = new SearchListAdapter(getApplicationContext(), countryItemList);
@@ -170,7 +171,7 @@ public class SearchActivity extends BaseActivity implements CountryView {
         adapter.clear();
         for (Country country : countryList) {
             if(query.length() <= country.getName().length() ){
-                if(query.equals(country.getName().substring(0, query.length()))){
+                if(query.equalsIgnoreCase(country.getName().substring(0, query.length()))){
                     adapter.add(country);
                     matchSearchString = true;
                 }
@@ -192,10 +193,8 @@ public class SearchActivity extends BaseActivity implements CountryView {
 
     @Override
     protected void onDestroy() {
-        if (mCompositeSubscription.hasSubscriptions()) {
-            mCompositeSubscription.unsubscribe();
-        }
         super.onDestroy();
+        mCompositeDisposable.clear();
     }
 
     @Override

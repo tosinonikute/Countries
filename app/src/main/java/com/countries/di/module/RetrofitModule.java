@@ -1,11 +1,13 @@
 package com.countries.di.module;
 
 
+import android.support.annotation.NonNull;
+
 import com.countries.data.remote.CountryInterface;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit.RestAdapter;
+import retrofit2.Retrofit;
 
 
 /**
@@ -16,7 +18,7 @@ import retrofit.RestAdapter;
 public class RetrofitModule {
 
     @Provides
-    public CountryInterface providesCountryInterface(RestAdapter restAdapter) {
-        return restAdapter.create(CountryInterface.class);
+    public CountryInterface providesCountryInterface(@NonNull Retrofit retrofit) {
+        return retrofit.create(CountryInterface.class);
     }
 }

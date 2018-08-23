@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
 import xyz.danoz.recyclerviewfastscroller.sectionindicator.title.SectionTitleIndicator;
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity implements CountryView {
     CountryInterface countryInterface;
 
     private Logger logger = Logger.getLogger(getClass());
-    private CompositeSubscription mCompositeSubscription;
+    private CompositeDisposable mCompositeDisposable;
     private ArrayList<Country> countryItemList;
     private RelativeLayout mainLayout;
     private CountryListAdapter adapter;
@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity implements CountryView {
         ((BaseApplication) getApplication()).getCountryComponent().inject(this);
         presenter.attachView(this);
 
-        mCompositeSubscription = new CompositeSubscription();
+        mCompositeDisposable = new CompositeDisposable();
         init();
         loadView();
 
@@ -117,11 +117,12 @@ public class MainActivity extends BaseActivity implements CountryView {
 
 
     public void countryList(){
-        presenter.getCountryList(countryInterface, mCompositeSubscription);
+        presenter.getCountryList(countryInterface, mCompositeDisposable);
     }
 
 
     public void setAdapter(ArrayList<Country> countryItemList){
+        hideLoading();
         if(countryItemList.size() > 0) {
             adapter = new CountryListAdapter(getApplicationContext(), countryItemList);
             recyclerView.setAdapter(adapter); // set adapter on recyclerview
@@ -185,10 +186,8 @@ public class MainActivity extends BaseActivity implements CountryView {
 
     @Override
     protected void onDestroy() {
-        if (mCompositeSubscription.hasSubscriptions()) {
-            mCompositeSubscription.unsubscribe();
-        }
         super.onDestroy();
+        mCompositeDisposable.clear();
     }
 
 

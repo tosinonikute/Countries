@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class CountryDetailActivity extends BaseActivity implements CountryDetailView {
 
@@ -42,7 +42,7 @@ public class CountryDetailActivity extends BaseActivity implements CountryDetail
     private String toolbarTitle;
 
     private Logger logger = Logger.getLogger(getClass());
-    private CompositeSubscription mCompositeSubscription;
+    private CompositeDisposable mCompositeDisposable;
     private ArrayList<Country> countryItemList;
     private LinearLayout detailLayout;
     private CountryListAdapter adapter;
@@ -70,7 +70,7 @@ public class CountryDetailActivity extends BaseActivity implements CountryDetail
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mCompositeSubscription = new CompositeSubscription();
+        mCompositeDisposable = new CompositeDisposable();
         init();
 
         Bundle extras = getIntent().getExtras();
@@ -123,12 +123,12 @@ public class CountryDetailActivity extends BaseActivity implements CountryDetail
     }
 
     public void countryDetailList(){
-        countryDetailPresenter.getCountryList(countryInterface, mCompositeSubscription, alpha3code);
+        countryDetailPresenter.getCountryList(countryInterface, mCompositeDisposable, alpha3code);
     }
 
 
     public void setCountryDetails(Country details){
-
+        hideLoading();
         detailsContainer.setVisibility(View.VISIBLE);
 
         String region = "";
