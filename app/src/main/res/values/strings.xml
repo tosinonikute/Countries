@@ -7,4 +7,8 @@
     <string name="no_connection_snackbar">No connection !</string>
     <string name="snackbar_action_retry">Retry</string>
     <string name="search_hint">Choose Country</string>
+    <string name="delete">REMOVE</string>
+    <!-- country item remove -->
+    <string name="removed_from_list">removed from list!</string>
+    <string name="action_undo">UNDO</string>
 </resources>

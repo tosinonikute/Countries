@@ -2,10 +2,15 @@ package com.countries.ui.countrylist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +38,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import xyz.danoz.recyclerviewfastscroller.sectionindicator.title.SectionTitleIndicator;
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
-public class MainActivity extends BaseActivity implements CountryView {
+public class MainActivity extends BaseActivity implements CountryView, RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
     @Inject
     CountryPresenter presenter;
@@ -87,6 +92,10 @@ public class MainActivity extends BaseActivity implements CountryView {
         recyclerView.setOnScrollListener(fastScroller.getOnScrollListener());
         fastScroller.setSectionIndicator(sectionTitleIndicator);
 
+        // Item touch
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
 
         searchIconButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +103,30 @@ public class MainActivity extends BaseActivity implements CountryView {
                 launchSearchActivity();
             }
         });
+    }
 
+    private void itemTouchCallback(){
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+        
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback1 = new ItemTouchHelper.SimpleCallback(
+                0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.UP) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        };
+
+        new ItemTouchHelper(itemTouchHelperCallback1).attachToRecyclerView(recyclerView);
     }
 
     public String getSectionFirstLetter(String letter) {
@@ -123,6 +155,7 @@ public class MainActivity extends BaseActivity implements CountryView {
 
     public void setAdapter(ArrayList<Country> countryItemList){
         hideLoading();
+        this.countryItemList = countryItemList;
         if(countryItemList.size() > 0) {
             adapter = new CountryListAdapter(getApplicationContext(), countryItemList);
             recyclerView.setAdapter(adapter); // set adapter on recyclerview
@@ -139,6 +172,30 @@ public class MainActivity extends BaseActivity implements CountryView {
                     }
                 }
             });
+
+            itemTouchCallback();
+        }
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if (viewHolder instanceof CountryListAdapter.ViewHolder) {
+            if(this.countryItemList.size() > 0) {
+                // get the removed country name to display it in snack bar
+                String name = this.countryItemList.get(viewHolder.getAdapterPosition()).getName();
+
+                final Country deletedCountry = this.countryItemList.get(viewHolder.getAdapterPosition());
+                final int deletedIndex = viewHolder.getAdapterPosition();
+
+                adapter.removeCountry(viewHolder.getAdapterPosition());
+
+                Snackbar snackbar = Snackbar.make(mainLayout, name + " " +
+                        getResources().getString(R.string.removed_from_list), Snackbar.LENGTH_LONG);
+                snackbar.setAction(getResources().getString(R.string.action_undo),
+                        (View view) -> adapter.restoreCountry(deletedCountry, deletedIndex) );
+                snackbar.setActionTextColor(Color.YELLOW);
+                snackbar.show();
+            }
         }
     }
 
@@ -181,7 +238,6 @@ public class MainActivity extends BaseActivity implements CountryView {
         Intent intent = new Intent(context, SearchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-
     }
 
     @Override
@@ -189,10 +245,6 @@ public class MainActivity extends BaseActivity implements CountryView {
         super.onDestroy();
         mCompositeDisposable.clear();
     }
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

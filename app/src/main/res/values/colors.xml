@@ -7,4 +7,8 @@
     <color name="colorSpacer">#cccccc</color>
     <color name="colorGrey">#333333</color>
     <color name="colorSearchBar">#6000</color>
+
+    <color name="colorBackground">#9b59b6</color>
+    <color name="colorOne">#535353</color>
+    <color name="colorTwo">#a9a9a9</color>
 </resources>

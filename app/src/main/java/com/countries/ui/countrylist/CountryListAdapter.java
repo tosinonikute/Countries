@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,6 +46,7 @@ public class CountryListAdapter
         public final ImageView countryItemImage;
         public final TextView countryTitle;
         public final TextView countryCapital;
+        public RelativeLayout viewBackground, viewForeground;
 
         public ViewHolder(View view) {
             super(view);
@@ -53,6 +55,8 @@ public class CountryListAdapter
             countryItemImage = (ImageView) view.findViewById(R.id.country_item_image);
             countryTitle = (TextView) view.findViewById(R.id.country_title);
             countryCapital = (TextView) view.findViewById(R.id.country_capital);
+            viewBackground = view.findViewById(R.id.view_background);
+            viewForeground = view.findViewById(R.id.view_foreground);
         }
 
         @Override
@@ -147,16 +151,13 @@ public class CountryListAdapter
     }
 
     public void addAll(List<Country> data){
-        //mCountry.addAll(data);
         notifyDataSetChanged();
     }
 
     public void add(Country data){
-        //mCountry.addAll(data);
         notifyDataSetChanged();
         mCountry.add(data);
     }
-
 
     public Country getItemPos(int pos){
         return mCountry.get(pos);
@@ -164,6 +165,16 @@ public class CountryListAdapter
 
     public void clear(){
         mCountry.clear();
+    }
+
+    public void removeCountry(int position) {
+        mCountry.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreCountry(Country item, int position) {
+        mCountry.add(position, item);
+        notifyItemInserted(position);
     }
 
 }

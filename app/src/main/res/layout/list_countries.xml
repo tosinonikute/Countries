@@ -1,59 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <RelativeLayout
+        android:id="@+id/view_background"
         android:layout_width="match_parent"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
+
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_delete" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/delete_icon"
+            android:text="@string/delete"
+            android:textColor="#fff"
+            android:textSize="13dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/view_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/country_item_image"
             android:layout_width="110dp"
             android:layout_height="60dp"
-            />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_marginRight="16dp"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/country_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingStart="10dp"
-            android:paddingRight="15dp"
-            android:paddingEnd="10dp"
-            android:textSize="17sp"
-            android:textColor="@color/colorGrey"
-            android:text="default country title"/>
+            android:layout_toRightOf="@id/country_item_image"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:textColor="@color/colorOne"
+            android:textSize="17dp" />
 
         <TextView
             android:id="@+id/country_capital"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingStart="10dp"
-            android:paddingRight="15dp"
-            android:paddingEnd="10dp"
-            android:text="default country capital"/>
+            android:layout_below="@id/country_title"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/country_item_image"
+            android:textColor="@color/colorTwo"
+            android:textSize="12dp" />
 
-         </LinearLayout>
+    </RelativeLayout>
 
-    </LinearLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:paddingRight="15dp"
-        android:background="@color/colorSpacer"/>
-
-</LinearLayout>
+</FrameLayout>
