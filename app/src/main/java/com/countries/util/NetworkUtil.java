@@ -11,14 +11,8 @@ import android.net.NetworkInfo;
 public class NetworkUtil {
 
     public static boolean isConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni == null) {
-            // There are no active networks.
-            return false;
-        } else {
-            return true;
-        }
+        final ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return connectivity != null && connectivity.getActiveNetworkInfo() != null && connectivity.getActiveNetworkInfo().isConnected();
     }
 
 
