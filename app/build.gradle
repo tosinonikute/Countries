@@ -62,16 +62,16 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:${constraintlayoutVer}"
 
     // Network
-    compile "com.google.code.gson:gson:$gson"
-    compile "com.squareup.retrofit2:retrofit:$retrofit"
-    compile "com.squareup.retrofit2:converter-gson:$retrofit"
-    compile "com.squareup.okhttp3:okhttp:$okhttp3"
-    compile "com.squareup.okhttp3:logging-interceptor:$okhttp3"
+    implementation "com.google.code.gson:gson:$gson"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3"
 
     // Rxjava2
-    compile "io.reactivex.rxjava2:rxjava:$rxjava"
-    compile "io.reactivex.rxjava2:rxandroid:$rxandroid"
-    compile "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rxadapter"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rxadapter"
 
     // DI
     implementation "com.google.dagger:dagger:${daggerVer}"
