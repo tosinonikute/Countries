@@ -24,8 +24,8 @@ An app showing list of countries and details using a RESTful API (https://restco
 
 Screenshots Below:
 
-<a href="#"><img src="https://github.com/tosinonikute/Countries/blob/master/images/screenshot1.png" align="left" width="260" ></a>
+<a href="#"><img src="https://github.com/tosinonikute/Countries/blob/master/images/screenshot1.png" align="left" width="220" ></a>
 
-<a href="#"><img src="https://github.com/tosinonikute/Countries/blob/master/images/screenshot2.png" align="left" width="260" ></a>
+<a href="#"><img src="https://github.com/tosinonikute/Countries/blob/master/images/screenshot2.png" align="left" width="220" ></a>
 
-<a href="#"><img src="https://github.com/tosinonikute/Countries/blob/master/images/screenshot3.png" align="left" width="260" ></a>
+<a href="#"><img src="https://github.com/tosinonikute/Countries/blob/master/images/screenshot3.png" align="left" width="220" ></a>
